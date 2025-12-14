@@ -1,0 +1,9 @@
+{
+	"name": "adfcourse-ritik",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "02cff1b7-b459-4c57-92e8-fa756e5b32a5",
+		"tenantId": "aa2128f0-7299-4d10-bfa7-e7c6ed05b224"
+	}
+}
