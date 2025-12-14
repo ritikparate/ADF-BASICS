@@ -1,0 +1,90 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfcourse-ritik"
+		},
+		"linkedserviceDL_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'linkedserviceDL'"
+		},
+		"linked_git_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com"
+		},
+		"linkedserviceDL_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storagedatafactoryritik.dfs.core.windows.net/"
+		},
+		"managertrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/e326840b-51eb-49f4-b04a-6d4687271922/resourceGroups/RG-ADFCourse/providers/Microsoft.Storage/storageAccounts/storagedatafactoryritik"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfcourse-ritik_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"linkedserviceDL_accountKey": {
+						"value": "[parameters('linkedserviceDL_accountKey')]"
+					},
+					"linked_git_properties_typeProperties_url": {
+						"value": "[parameters('linked_git_properties_typeProperties_url')]"
+					},
+					"linkedserviceDL_properties_typeProperties_url": {
+						"value": "[parameters('linkedserviceDL_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfcourse-ritik_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"managertrigger_properties_typeProperties_scope": {
+						"value": "[parameters('managertrigger_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfcourse-ritik_ArmTemplate_0')]"
+			]
+		}
+	]
+}

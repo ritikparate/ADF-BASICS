@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfcourse-ritik"
+		},
+		"linkedserviceDL_accountKey": {
+			"value": ""
+		},
+		"linked_git_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"linkedserviceDL_properties_typeProperties_url": {
+			"value": "https://storagedatafactoryritik.dfs.core.windows.net/"
+		},
+		"managertrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/e326840b-51eb-49f4-b04a-6d4687271922/resourceGroups/RG-ADFCourse/providers/Microsoft.Storage/storageAccounts/storagedatafactoryritik"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
